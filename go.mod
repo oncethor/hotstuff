@@ -19,9 +19,10 @@ require (
 	go.uber.org/multierr v1.7.0
 	go.uber.org/zap v1.17.0
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac
-	golang.org/x/tools v0.1.8-0.20211028023602-8de2a7fd1736 // indirect
 	gonum.org/v1/plot v0.8.1
-	google.golang.org/genproto v0.0.0-20210602131652-f16073e35f0c
-	google.golang.org/grpc v1.38.0
-	google.golang.org/protobuf v1.26.0
+	google.golang.org/genproto v0.0.0-20211222154725-9823f7ba7562
+	google.golang.org/grpc v1.43.0
+	google.golang.org/protobuf v1.27.1
 )
+
+replace github.com/relab/gorums => github.com/Raytar/gorums v0.0.0-20211231104811-2a2098e7b539
