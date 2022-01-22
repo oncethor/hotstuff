@@ -17,5 +17,8 @@ service Handel {
 message Contribution {
   uint32 ID = 1;
   uint32 Level = 2;
-  hotstuffpb.PartialCert Signature = 3;
+  oneof Contribution {
+    hotstuffpb.PartialCert Signature = 3;
+    hotstuffpb.ThresholdSignature MultiSignature = 4;
+  }
 }
