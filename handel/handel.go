@@ -19,9 +19,9 @@ import (
 )
 
 type Handel struct {
-	mods *consensus.Modules
-	cfg  *handelpb.Configuration
-
+	mods     *consensus.Modules
+	cfg      *handelpb.Configuration
+	maxLevel int
 	sessions map[consensus.Hash]*session
 }
 
@@ -46,6 +46,8 @@ func (h *Handel) Init() error {
 
 	handelpb.RegisterHandelServer(srv.GetGorumsServer(), serviceImpl{h})
 	h.cfg = handelpb.ConfigurationFromRaw(cfg.GetRawConfiguration(), nil)
+
+	h.maxLevel = int(math.Ceil(math.Log2(float64(h.mods.Configuration().Len()))))
 
 	return nil
 }
@@ -136,6 +138,14 @@ func contributionPriority(ids []hotstuff.ID, seed int64, self hotstuff.ID, level
 	}
 
 	return cp
+}
+
+func (s *session) score(contribution *handelpb.Contribution) int {
+	if contribution.GetLevel() < 1 || int(contribution.GetLevel()) > s.h.maxLevel {
+		// invalid level
+		return 0
+	}
+
 }
 
 // session
